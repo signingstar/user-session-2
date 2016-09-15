@@ -49,14 +49,14 @@ const loginController = function({modules}) {
       verifyUser(userid, password, (isValid) => {
         if(isValid) {
           res.cookie('isLogged', true, {maxAge: 60*60*1000});
-          refUrl = presenter(refUrl, true).parsedUri;
+          const refUrl = presenter(req.query.ref_url, true).parsedUri;
           responders.redirectWithCookies(decodeURIComponent(refUrl));
         } else {
           headerPresenter({topNav:false}, page);
 
           page.set(pageConfig);
           page.set( {
-            refUrl: presenter(req.query.ref_url),
+            refUrl: presenter(req.query.ref_url).uriWithRef,
             message: 'Invalid login or password'
           })
 

@@ -1,4 +1,4 @@
-let { format, parse } = require("url");
+import { format, parse } from "url";
 import { find } from "underscore";
 
 let sessionPaths = ['login', 'signup', 'forgot-password', 'password-reset', 'signout'];
