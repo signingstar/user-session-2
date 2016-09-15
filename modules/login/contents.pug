@@ -1,0 +1,17 @@
+.session-content
+  .title-header
+    h2 Login
+    | Or
+    a.other-option(
+      href='/signup'
+      ) Register
+
+  #error-message.message= message
+
+  .session-body
+    .form-elements.login
+      include ./form
+
+    .separator
+
+    include ./session_option

@@ -1,0 +1,47 @@
+{
+  "name": "user-sessions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start",
+    "build": "rm -rf ./lib && babel -d ./lib ./modules -s"
+  },
+  "license": "MIT",
+  "author": "Anil Keshari",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "tisko-header": "github:signingstar/tisko-header",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "codecov": "^1.0.1",
+    "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "karma": "^1.3.0",
+    "karma-chai": "^0.1.0",
+    "karma-coverage": "^1.1.1",
+    "karma-mocha": "^1.1.1",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-sinon": "^1.0.5",
+    "karma-webpack": "^1.8.0",
+    "karma-webpack-with-fast-source-maps": "^1.10.0",
+    "mocha": "^3.0.2",
+    "node-sass": "^3.8.0",
+    "pug": "^2.0.0-beta4",
+    "sass-loader": "^4.0.0",
+    "sinon": "^1.17.5",
+    "source-map-support": "^0.4.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1"
+  },
+  "private": true
+}

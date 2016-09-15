@@ -1,0 +1,30 @@
+form(
+  method='post'
+  action= refUrl
+  )
+  fieldset
+    .password-input.field
+      label(
+        for='userpassword'
+        ) Password
+      input#userpassword-value(
+        name='userpassword'
+        placeholder='minimum 6 letters'
+        required
+        type='password'
+        )
+    .password-confirm.field
+      label(
+        for='confirmpassword'
+        ) Confirm Password
+      input#confirmpassword-value(
+        name='confirmpassword'
+        required
+        type='password'
+        )
+    .button
+      input(
+        type='submit'
+        name='submit'
+        value='Reset'
+        )

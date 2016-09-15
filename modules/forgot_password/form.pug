@@ -1,0 +1,20 @@
+form(
+  method='post'
+  action= refUrl
+  )
+  fieldset
+    .email-input.field
+      label(
+        for='userid'
+        ) Email Id
+      input#userid-value(
+        name='userid'
+        placeholder='youremail@gmail.com'
+        required
+        type='email'
+        )
+    .button
+      input(
+        type='button'
+        value='Send Email'
+        )

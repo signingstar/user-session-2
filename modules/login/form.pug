@@ -1,0 +1,39 @@
+form(
+  method='post'
+  action= refUrl
+  )
+  fieldset
+    .email-input.field
+      label(
+        for='userid'
+        ) Email Id
+      input#userid-value(
+        name='userid'
+        placeholder='youremail@gmail.com'
+        required
+        type='email'
+        )
+    .password-input.field
+      label(
+        for='password'
+        ) Password
+      input#userpassword-value(
+        name='password'
+        required
+        type='password'
+        )
+    .forgot-password
+      a(
+        href='/forgot-password'
+        ) Forgot password?
+    .remember-me
+      input(
+        type='checkbox'
+        name='rememberMe'
+        )
+      span Remember Me
+    .button
+      input(
+        type='submit'
+        value='Login'
+        )

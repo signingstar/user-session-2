@@ -1,0 +1,65 @@
+form(
+  method='post'
+  action= refUrl
+  )
+  fieldset
+    .name-input.field
+      label(
+        for='username'
+        ) Full Name
+      input#username-value(
+        name='username'
+        placeholder=''
+        required
+        type='text'
+        )
+    .email-input.field
+      label(
+        for='userid'
+        ) Email Id
+      input#userid-value(
+        name='userid'
+        placeholder='youremail@gmail.com'
+        required
+        type='email'
+        )
+    .password-input.field
+      label(
+        for='password'
+        ) Password
+      input#userpassword-value(
+        name='password'
+        placeholder='minimum 8 characters'
+        required
+        type='password'
+        )
+    .password-confirm.field
+      label(
+        for='confirmpassword'
+        ) Confirm Password
+      input#confirmpassword-value(
+        name='confirmpassword'
+        required
+        type='password'
+        )
+    .phone-input.field
+      label(
+        for='telephone'
+        ) Mobile Number
+      input#telephone-value(
+        name='telephone'
+        placeholder=''
+        required
+        type='tel'
+        )
+    .remember-me
+      input(
+        type='checkbox'
+        )
+      span Remember Me
+    .button
+      input(
+        type='submit'
+        name='submit'
+        value='Register'
+        )

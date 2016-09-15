@@ -1,0 +1,197 @@
+.contact-us #main-contents {
+  max-width: 1100px;
+
+  .session-options#contact-us {
+    position: relative;
+    transform: none;
+    vertical-align: top;
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+  }
+
+  .contact-address {
+    margin: 10px 0;
+    li {
+      margin: 5px 0;
+
+      .label {
+        font-weight: 600;
+      }
+
+      .field-value {
+        padding: 10px;
+      }
+    }
+  }
+
+  .office-address {
+    margin-top: 40px;
+    font-size: 16px;
+  }
+}
+
+#main-contents {
+  margin: 30px auto;
+  max-width: 800px;
+
+  .session-content {
+    padding: 10px;
+
+    .title-header {
+      border-bottom: 1px dotted $light-gray;
+      margin-bottom: 15px;
+      padding-bottom: 7px;
+      text-transform: capitalize;
+
+      h2, h3 {
+        margin: 0;
+        display: inline-block;
+        padding-right: 10px;
+      }
+
+      .other-option {
+        padding-left: 5px;
+      }
+    }
+
+    .message {
+      height: 20px;
+      margin-bottom: 10px;
+    }
+
+    #error-message {
+      @extend .message;
+      color: red;
+    }
+
+    .session-body {
+      padding: 2px;
+      position: relative;
+
+      .separator {
+        border-left: 1px dotted $light-gray;
+        display: inline-block;
+        height: 166px;
+        margin: 0 30px;
+      }
+
+      .form-elements {
+        display: inline-block;
+
+        &.signup, &.password-reset {
+          .field label {
+            width: 130px;
+          }
+        }
+
+        &.forgot-password {
+          margin-top: 15px;
+        }
+
+        fieldset {
+          border: 0;
+          margin: 0;
+          padding: 0 30px;
+
+          >div {
+            padding: 5px 0;
+          }
+
+          label {
+            display: inline-block;
+            width: 105px;
+          }
+
+          .field {
+            input {
+              font-size: 14px;
+              height: 28px;
+              outline: 0;
+              width: 250px;
+            }
+
+            textarea {
+              height: 150px;
+              vertical-align: middle;
+              width: 350px;
+            }
+          }
+
+          .forgot-password {
+            font-size: 14px;
+            padding: 0;
+            text-align: right;
+            text-transform: lowercase;
+            font-style: italic;
+          }
+
+          .remember-me {
+            padding: 5px 0 0 127px;
+            text-align: left;
+
+            span {
+              display: inline-block;
+              padding-left: 5px;
+            }
+          }
+
+          .message-type select {
+            width: 250px;
+          }
+
+          .button {
+            margin-top: 25px;
+            text-align: center;
+
+            input {
+              background-color: $button-orig-color;
+              border: 1px solid $button-hover-color;
+              color: $link-color-bg;
+              cursor: pointer;
+              font-size: 17px;
+              height: 40px;
+              outline: 0;
+              width: 175px;
+
+              &:hover {
+                background-color: $button-hover-color;
+              }
+            }
+          }
+        }
+      }
+
+      .session-options {
+        display: inline-block;
+        font-size: 15px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        a {
+          font-size: 16px;
+          padding: 0 5px;
+        }
+      }
+    }
+  }
+}
+
+.login #main-contents .session-content.separator {
+  height: 166px;
+}
+
+.signup #main-contents .session-content .separator {
+  height: 280px;
+}
+
+.forgot-password #main-contents .session-content .separator {
+  height: 90px;
+}
+
+.contact-us #main-contents .session-content .separator {
+  height: 355px;
+}

@@ -1,0 +1,13 @@
+src/**/*.js
+
+webpack.config.js
+
+.npmignore
+
+.babelrc
+
+.gitignore
+
+karma.conf.js
+
+tests
