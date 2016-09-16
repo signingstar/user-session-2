@@ -3,7 +3,7 @@ import path from "path";
 
 import { presenter } from "./presenter";
 import verifyUser from "./verify_login";
-import headerPresenter from "tisko-header";
+import headerPresenter from "tisko-layout";
 let debug = require("debug")("Modules:loginController");
 
 const loginController = function({modules}) {

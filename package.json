@@ -12,7 +12,7 @@
   "private": true,
   "dependencies": {
     "jquery": "^3.1.0",
-    "tisko-header": "github:signingstar/tisko-header",
+    "tisko-layout": "github:signingstar/tisko-layout",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

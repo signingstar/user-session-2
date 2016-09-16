@@ -2,7 +2,7 @@ import { find, pick } from "underscore";
 import path from "path";
 
 import { presenter } from "./presenter";
-import headerPresenter from "tisko-header";
+import headerPresenter from "tisko-layout";
 import updateUserList from "./update_user_list";
 
 const signUpController = function({modules}) {
