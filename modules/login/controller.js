@@ -25,7 +25,7 @@ const loginController = function({modules}) {
       let {req, res} = attributes;
       let {cookies} = req;
 
-      let {isLogged = false} = headerPresenter({cookies, topNav:false}, page);
+      let {isLogged = false} = headerPresenter({cookies, topNav:false}, page, {jsAsset})
 
       if(isLogged) {
         responders.redirectWithCookies("/");
@@ -52,7 +52,7 @@ const loginController = function({modules}) {
           const refUrl = presenter(req.query.ref_url, true).parsedUri;
           responders.redirectWithCookies(decodeURIComponent(refUrl));
         } else {
-          headerPresenter({topNav:false}, page);
+          headerPresenter({topNav:false}, page, {jsAsset})
 
           page.set(pageConfig);
           page.set( {

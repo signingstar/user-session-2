@@ -6,33 +6,34 @@ import headerPresenter from "tisko-layout";
 import updateUserList from "./update_user_list";
 
 const signUpController = function({modules}) {
-  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const srcPath = path.join(__dirname, '../../views/', 'signup');
+  const renderHTML = pugCompiler(srcPath);
+  const title = 'Tisko - Register';
+  const pageConfig = {
+    javascript: jsAsset('sessionjs'),
+    stylesheet: cssAsset('sessioncss'),
+    body_class: 'signup',
+    title
+  };
 
   return {
     get: function({attributes, responders, page}) {
-      let {req, res} = attributes;
-      const srcPath = path.join(__dirname, '../../views/', 'signup');
-      let fn = pugCompiler(srcPath);
-      let refUrl = presenter(req.query.ref_url).uriWithRef;
-      let {cookies} = req;
-      const title = 'Tisko - Register';
+      const {req, res} = attributes;
+      const refUrl = presenter(req.query.ref_url).uriWithRef;
+      const {cookies} = req;
 
-      let {isLogged = false} = headerPresenter({cookies, topNav:false}, page);
+      const {isLogged = false} = headerPresenter({cookies, topNav:false}, page, {jsAsset})
 
       if(isLogged) {
         responders.redirectWithCookies("/");
         return;
       }
 
-      page.set( {
-        javascript: jsAsset('sessionjs'),
-        stylesheet: cssAsset('sessioncss'),
-        title,
-        refUrl,
-        body_class: 'signup'
-      })
+      page.set(pageConfig);
+      page.set({refUrl});
 
-      let html = fn(page);
+      let html = renderHTML(page);
 
       responders.html(html);
     },
@@ -52,19 +53,10 @@ const signUpController = function({modules}) {
           refUrl = presenter(refUrl, true).parsedUri;
           responders.redirectWithCookies(refUrl);
         } else {
-          let srcPath = path.join(__dirname, './', 'main');
-          let fn = pugCompiler(srcPath);
+          page.set(pageConfig);
+          page.set({message: 'Couldn\`t signed up', refUrl});
 
-          page.set( {
-            javascript: jsAsset('sessionjs'),
-            stylesheet: cssAsset('sessioncss'),
-            title: 'Tisko - Register',
-            refUrl,
-            body_class: 'signup',
-            message: 'Couldn\`t signed up'
-          })
-
-          let html = fn(page);
+          let html = renderHTML(page);
 
           responders.html(html);
         }

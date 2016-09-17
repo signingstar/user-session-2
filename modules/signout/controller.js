@@ -11,7 +11,7 @@ const signOutController = function({modules}) {
       let fn = pugCompiler(srcPath);
       res.clearCookie('isLogged');
 
-      headerPresenter({}, page);
+      headerPresenter({}, page, {jsAsset})
 
       page.set( {
         javascript: jsAsset('sessionjs'),
