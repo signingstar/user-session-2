@@ -10,7 +10,7 @@ const forgotPasswordController = function({modules}) {
       const srcPath = path.join(__dirname, '../../views/', 'forgot_password');
       let fn = pugCompiler(srcPath);
 
-      headerPresenter({}, page);
+      headerPresenter({}, page, {jsAsset})
 
       page.set( {
         javascript: jsAsset('sessionjs'),
