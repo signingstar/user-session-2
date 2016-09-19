@@ -2,16 +2,17 @@ import { pick } from "underscore";
 import path from "path";
 
 import { presenter } from "./presenter";
-import verifyUser from "./verify_login";
 import headerPresenter from "tisko-layout";
+import authenticateUser from "../database/api/authenticate_user";
+import formValidator from "./form_validator";
 let debug = require("debug")("Modules:loginController");
 
 const loginController = function({modules}) {
-  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const { pugCompiler, logger, jsAsset, cssAsset, queryDb } = modules;
   const title = 'Tisko - Login';
   const srcPath = path.join(__dirname, '../../views/', 'login');
 
-  let fn = pugCompiler(srcPath);
+  let renderHTML = pugCompiler(srcPath);
 
   const pageConfig = {
     javascript: jsAsset('sessionjs'),
@@ -37,7 +38,7 @@ const loginController = function({modules}) {
         refUrl: presenter(req.query.ref_url).uriWithRef
       })
 
-      let html = fn(page);
+      let html = renderHTML(page);
 
       responders.html(html);
     },
@@ -46,27 +47,37 @@ const loginController = function({modules}) {
       let {req, res} = attributes;
       let {userid, password} = pick(req.body, (value, key) => key === 'userid' || key === 'password');
 
-      verifyUser(userid, password, (isValid) => {
-        if(isValid) {
+      const { err, loginData } = formValidator({userid, password});
+
+      if(err) {
+        respondError({message: err.message, pageConfig},  { renderHTML, page, jsAsset, responders});
+        return;
+      }
+
+      authenticateUser(loginData, { logger, queryDb }, (err, result) => {
+        if(!err) {
           res.cookie('isLogged', true, {maxAge: 60*60*1000});
-          const refUrl = presenter(req.query.ref_url, true).parsedUri;
-          responders.redirectWithCookies(decodeURIComponent(refUrl));
+          const parsedRefUrl = presenter(req.query.ref_url, true).parsedUri;
+          responders.redirectWithCookies(decodeURIComponent(parsedRefUrl));
         } else {
-          headerPresenter({topNav:false}, page, {jsAsset})
-
-          page.set(pageConfig);
-          page.set( {
-            refUrl: presenter(req.query.ref_url).uriWithRef,
-            message: 'Invalid login or password'
-          })
-
-          let html = fn(page);
-
-          responders.html(html);
+          respondError({message: err.message, pageConfig}, { renderHTML, page, jsAsset, responders} );
         }
       });
     }
   }
 }
+
+const respondError = ({message, pageConfig}, modules) => {
+  const { jsAsset, page, renderHTML, responders } = modules;
+
+  page.set(pageConfig);
+  page.set({message});
+  headerPresenter({topNav:false}, page, {jsAsset})
+
+  const html = renderHTML(page);
+
+  responders.html(html);
+}
+
 
 export default loginController;
