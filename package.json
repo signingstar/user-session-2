@@ -6,7 +6,7 @@
   "scripts": {
     "test": "karma start",
     "build": "rm -rf ./lib && babel -d ./lib ./modules -s",
-    "build-debug": "babel -d ./lib --watch ./modules"
+    "build-debug": "babel -d ./lib --watch ./modules -s"
   },
   "license": "MIT",
   "author": "Anil Keshari",
@@ -15,7 +15,8 @@
     "jquery": "^3.1.0",
     "tisko-layout": "github:signingstar/tisko-layout",
     "underscore": "^1.8.3",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "validator": "^5.7.0"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",

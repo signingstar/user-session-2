@@ -5,7 +5,7 @@ let sessionPaths = ['login', 'signup', 'forgot-password', 'password-reset', 'sig
 
 export const getUriWithRefUrl = (action, refUrl) => {
   let pathname = "/" + action;
-  if (!refUrl) {
+  if (!refUrl || refUrl === 'undefined') {
     return pathname;
   }
 
@@ -18,7 +18,7 @@ export const getUriWithRefUrl = (action, refUrl) => {
 export const getUriWithCheck = (isLogged, refUrl) => {
   let homePageUri = format({pathname: '/'});
 
-  if(!refUrl) {
+  if(!refUrl || refUrl === 'undefined') {
     return homePageUri;
   }
 

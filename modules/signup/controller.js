@@ -3,10 +3,12 @@ import path from "path";
 
 import { presenter } from "./presenter";
 import headerPresenter from "tisko-layout";
-import updateUserList from "./update_user_list";
+import AddUser from "../database/api/insert_user";
+import formValidator from "./form_validator";
 
 const signUpController = function({modules}) {
-  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const { pugCompiler, logger, jsAsset, cssAsset, queryDb } = modules;
+
   const srcPath = path.join(__dirname, '../../views/', 'signup');
   const renderHTML = pugCompiler(srcPath);
   const title = 'Tisko - Register';
@@ -38,31 +40,57 @@ const signUpController = function({modules}) {
       responders.html(html);
     },
 
-    post: function({attributes, responders, page}) {
-      let {req, res} = attributes;
-      let refUrl = decodeURI(req.query.ref_url);
-      let validFields = ['userid', 'username', 'password', 'telephone']
+    post: ({attributes, responders, page}) => {
+      const {req, res} = attributes;
+      const refUrl = req.query.ref_url ?  decodeURI(req.query.ref_url) : undefined;
 
-      let signupData = pick(req.body, (value, key)=> {
-        return find(validFields, (field) => field === key);
-      });
+      const { err, signupData } = filterAndValidateFields(req.body);
 
-      updateUserList(signupData, (state) => {
-        if(state) {
+      if(err) {
+        respondError({message: err.message, pageConfig},  { renderHTML, page, jsAsset, responders});
+        return;
+      }
+
+      logger.info(`signupData:${signupData.join('<->')}`);
+
+      AddUser(signupData, { logger, queryDb }, (err, result) => {
+        if(!err) {
           res.cookie('isLogged', true, {maxAge: 60*60*1000});
-          refUrl = presenter(refUrl, true).parsedUri;
-          responders.redirectWithCookies(refUrl);
+          const parsedRefUrl = presenter(refUrl, true).parsedUri;
+          responders.redirectWithCookies(parsedRefUrl);
         } else {
-          page.set(pageConfig);
-          page.set({message: 'Couldn\`t signed up', refUrl});
-
-          let html = renderHTML(page);
-
-          responders.html(html);
+          respondError({message: err.message, pageConfig}, { renderHTML, page, jsAsset, responders} );
         }
       });
     }
   }
+}
+
+const filterAndValidateFields = (bodyContent, cb) => {
+  const { userid, fullname, password, telephone, confirmpassword } = bodyContent;
+  const {err, formData} = formValidator({ userid, fullname, password, telephone, confirmpassword });
+
+  if(err) {
+    return {err};
+  }
+
+  const name = fullname.split(" ");
+  const last_name = name.pop();
+  const first_name = name.join(' ');
+
+  return { signupData: [first_name, last_name, userid, password] };
+}
+
+const respondError = ({message, pageConfig}, modules) => {
+  const { jsAsset, page, renderHTML, responders } = modules;
+
+  page.set(pageConfig);
+  page.set({message});
+  headerPresenter({topNav:false}, page, {jsAsset})
+
+  const html = renderHTML(page);
+
+  responders.html(html);
 }
 
 export default signUpController;
