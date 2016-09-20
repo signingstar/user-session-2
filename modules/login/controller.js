@@ -7,7 +7,7 @@ import authenticateUser from "../database/api/authenticate_user";
 import formValidator from "./form_validator";
 let debug = require("debug")("Modules:loginController");
 
-const loginController = function({modules}) {
+const controller = function({modules}) {
   const { pugCompiler, logger, jsAsset, cssAsset, queryDb } = modules;
   const title = 'Tisko - Login';
   const srcPath = path.join(__dirname, '../../views/', 'login');
@@ -67,17 +67,4 @@ const loginController = function({modules}) {
   }
 }
 
-const respondError = ({message, pageConfig}, modules) => {
-  const { jsAsset, page, renderHTML, responders } = modules;
-
-  page.set(pageConfig);
-  page.set({message});
-  headerPresenter({topNav:false}, page, {jsAsset})
-
-  const html = renderHTML(page);
-
-  responders.html(html);
-}
-
-
-export default loginController;
+export default controller;
