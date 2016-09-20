@@ -4,7 +4,7 @@ const validateForm = (content) => {
   const { userid, fullname, password, telephone, confirmpassword } = content;
 
   if(password !== confirmpassword) {
-    return {err: `Passwords do not match`};
+    return {err: {message:`Passwords do not match`}};
   }
 
   const formData = { userid, fullname, password, telephone, confirmpassword };

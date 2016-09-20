@@ -6,7 +6,8 @@
       href='/login'
       ) Login
 
-  #error-message.message
+  if message
+    #error-message.message= message
 
   .session-body
     .form-elements.signup

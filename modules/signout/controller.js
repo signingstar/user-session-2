@@ -2,27 +2,31 @@ import headerPresenter from "tisko-layout";
 import path from "path";
 
 const signOutController = function({modules}) {
-  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const srcPath = path.join(__dirname, '../../views/', 'signout');
+  const renderHTML = pugCompiler(srcPath);
+  const title = 'Tisko - Logged out';
 
   return {
     main: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      const srcPath = path.join(__dirname, '../../views/', 'signout');
-      let fn = pugCompiler(srcPath);
-      res.clearCookie('isLogged');
+
+      res.clearCookie('wibele');
+
+      req.session.destroy((err) => {
+        logger.info('session destroyed');
+      });
 
       headerPresenter({}, page, {jsAsset})
 
       page.set( {
         javascript: jsAsset('sessionjs'),
         stylesheet: cssAsset('sessioncss'),
-        title: 'Tisko - Logged out',
+        title,
         body_class: 'signout'
       })
 
-      let html = fn(page);
-
-      responders.html(html);
+      responders.html(renderHTML(page));
     }
   }
 }
