@@ -10,7 +10,7 @@ const authenticateUser = (loginData, modules, cb) => {
 
     const { rows } = result
 
-    if(rows.length === 1) {
+    if(rows.length === 1 && rows[0].id) {
       logger.info(`[LOGIN] successful for user: ${rows[0].email}`)
       cb(err, result.rows[0])
     } else {
