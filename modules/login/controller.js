@@ -55,6 +55,8 @@ const controller = function({modules}) {
 
       authenticateUser(loginData, { logger, queryDb }, (err, result) => {
         if(!err) {
+          logger.info(`LOGIN successful for user: ${loginData[0]}`);
+
           req.session.regenerate((err) => {
             req.session.user = result;
             res.cookie('fortune', result.id, {maxAge: 365*24*60*60*1000});

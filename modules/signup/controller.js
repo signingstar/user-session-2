@@ -52,8 +52,15 @@ const controller = ({modules}) => {
 
       addUser(signupData, { logger, queryDb }, (err, result) => {
         if(!err) {
+          logger.info(`SIGNUP successful for user: ${signupData[2]}`);
+
           req.session.regenerate((err) => {
-            req.session.user = result;
+            req.session.user = {
+              id: result.id,
+              first_name: signupData[0],
+              last_name: signupData[1],
+              email: signupData[2]
+            };
             res.cookie('fortune', result.id, {maxAge: 365*24*60*60*1000});
             const parsedRefUrl = presenter(refUrl, true).parsedUri;
             responders.redirectWithCookies(decodeURIComponent(parsedRefUrl));
