@@ -1,14 +1,14 @@
-import headerPresenter from "tisko-layout";
-import path from "path";
+import headerPresenter from "tisko-layout"
+import path from "path"
 
 const forgotPasswordController = function({modules}) {
-  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules
 
   return {
     main: function({attributes, responders, page}) {
-      let {req, res} = attributes;
-      const srcPath = path.join(__dirname, '../../views/', 'forgot_password');
-      let fn = pugCompiler(srcPath);
+      let {req, res} = attributes
+      const srcPath = path.join(__dirname, '../../views/', 'forgot_password')
+      let fn = pugCompiler(srcPath)
 
       headerPresenter({}, page, {jsAsset})
 
@@ -19,11 +19,11 @@ const forgotPasswordController = function({modules}) {
         body_class: 'forgot-password'
       })
 
-      let html = fn(page);
+      let html = fn(page)
 
-      responders.html(html);
+      responders.html(html)
     }
   }
 }
 
-export default forgotPasswordController;
+export default forgotPasswordController

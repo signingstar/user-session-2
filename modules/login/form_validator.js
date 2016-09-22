@@ -1,9 +1,9 @@
-import validator from "validator";
+import validator from "validator"
 
 const validateForm = (content) => {
-  const { userid, password } = content;
+  const { userid, password } = content
 
-  return {loginData: [userid, password]};
+  return {loginData: [userid, password]}
 }
 
-export default validateForm;
+export default validateForm

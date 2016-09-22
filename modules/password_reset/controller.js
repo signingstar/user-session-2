@@ -1,13 +1,13 @@
-import path from "path";
+import path from "path"
 
 const passwordResetController = function({modules}) {
-  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules
 
   return {
     main: function({attributes, responders, page}) {
-      let {req, res} = attributes;
-      const srcPath = path.join(__dirname, '../../views/', 'password_reset');
-      let fn = pugCompiler(srcPath);
+      let {req, res} = attributes
+      const srcPath = path.join(__dirname, '../../views/', 'password_reset')
+      let fn = pugCompiler(srcPath)
 
       page.set( {
         javascript: jsAsset('sessionjs'),
@@ -16,19 +16,19 @@ const passwordResetController = function({modules}) {
         body_class: 'password-reset'
       })
 
-      let html = fn(page);
+      let html = fn(page)
 
-      responders.html(html);
+      responders.html(html)
     },
 
     reset_password: function({attributes, responders, page}) {
-      let {req, res} = attributes;
-      let refUrl = decodeURI(req.protocol + '://' + req.get('host'));
+      let {req, res} = attributes
+      let refUrl = decodeURI(req.protocol + '://' + req.get('host'))
 
-      responders.redirectWithCookies(refUrl);
+      responders.redirectWithCookies(refUrl)
 
     }
   }
 }
 
-export default passwordResetController;
+export default passwordResetController

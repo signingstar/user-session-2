@@ -1,8 +1,8 @@
-import { getUriWithRefUrl, getUriWithCheck } from "../session/form_uri";
+import { getUriWithRefUrl, getUriWithCheck } from "../session/form_uri"
 
 export let presenter = function(retUrl, isLogged) {
-  let uriWithRef = getUriWithRefUrl('login', retUrl);
-  let parsedUri = getUriWithCheck(isLogged, retUrl);
+  let uriWithRef = getUriWithRefUrl('login', retUrl)
+  let parsedUri = getUriWithCheck(isLogged, retUrl)
 
-  return {uriWithRef, parsedUri};
-};
+  return {uriWithRef, parsedUri}
+}
