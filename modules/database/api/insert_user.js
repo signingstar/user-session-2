@@ -13,7 +13,12 @@ const addUser = (signupData, modules, cb) => {
 
     const { rows } = result
 
-    callback(err, result.rows[0])
+    if(rows.length === 1 && rows[0].user_id) {
+      callback(err, result.rows[0])
+    } else {
+      const message = 'Error Signing up user'
+      callback({message})
+    }
   })
 }
 
