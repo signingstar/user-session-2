@@ -12,7 +12,10 @@
   "author": "Anil Keshari",
   "private": true,
   "dependencies": {
+    "async": "^2.0.1",
     "jquery": "^3.1.0",
+    "nodemailer": "^2.6.4",
+    "nodemailer-sendgrid-transport": "^0.2.0",
     "tisko-layout": "github:signingstar/tisko-layout",
     "underscore": "^1.8.3",
     "url": "^0.11.0",
