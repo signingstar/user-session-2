@@ -11,10 +11,10 @@ const authenticateUser = (loginData, modules, cb) => {
     const { rows } = result
 
     if(rows.length === 1 && rows[0].id) {
-      logger.info(`[LOGIN] successful for user: ${rows[0].email}`)
+      logger.info(`[DATABASE] LOGIN successful for user: ${rows[0].email}`)
       cb(err, result.rows[0])
     } else {
-      const message = 'Invalid Username or Password'
+      const message = '[DATABASE] Invalid Username or Password'
       cb({message})
     }
   })

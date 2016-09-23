@@ -55,7 +55,7 @@ const controller = function({modules}) {
 
       authenticateUser(loginData, { logger, queryDb }, (err, result) => {
         if(!err) {
-          logger.info(`LOGIN successful for user: ${loginData[0]}`)
+          logger.info(`LOGIN successful for user: ${result.email}`)
 
           req.session.regenerate((err) => {
             req.session.user = result
