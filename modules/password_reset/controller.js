@@ -58,10 +58,10 @@ const passwordResetController = function({modules}) {
           (user, done) => {
             const {email} = user
             const mailOptions = {
-              receiver: email,
-              sender: 'notify@tisko.com',
+              to: email,
+              from: 'notify@tisko.com',
               subject: 'Your password has been changed',
-              content: 'Hello,\n\n' +
+              text: 'Hello,\n\n' +
                       `This is a confirmation that the password for your account ${email} has just been changed.\n`
             }
 

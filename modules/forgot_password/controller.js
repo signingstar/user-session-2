@@ -54,10 +54,10 @@ const forgotPasswordController = function({modules}) {
           (user, done) => {
             const {email, token} = user
             var mailOptions = {
-              receiver: email,
-              sender: 'verify@tisko.com',
+              to: email,
+              from: 'verify@tisko.com',
               subject: 'Tisko Password Reset',
-              content: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+              text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                         `http://${req.headers.host}/password-reset/${token}` + '\n\n' +
                         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
