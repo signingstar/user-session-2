@@ -24,9 +24,9 @@ const controller = ({modules}) => {
     get: ({attributes, responders, page}) => {
       const {req, res} = attributes
       const refUrl = presenter(req.query.ref_url).uriWithRef
-      const {session} = req
+      const {session: {user}} = req
 
-      const {isLogged = false} = layoutPresenter({session, topNav:false}, page, {jsAsset})
+      const {isLogged = false} = layoutPresenter({user, topNav:false}, page, {jsAsset})
 
       if(isLogged) {
         responders.redirectWithCookies("/")

@@ -12,9 +12,9 @@ const passwordResetController = function({modules}) {
   return {
     main: function({attributes, responders, page}) {
       const {req, res} = attributes
-      const {session, params: {token}} = req
+      const {session: {user}, params: {token}} = req
 
-      const {isLogged = false} = layoutPresenter({session, topNav:false}, page, {jsAsset})
+      const {isLogged = false} = layoutPresenter({user, topNav:false}, page, {jsAsset})
 
       if(isLogged) {
         responders.redirectWithCookies("/")

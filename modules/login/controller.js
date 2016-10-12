@@ -25,13 +25,12 @@ const controller = function({modules}) {
   return {
     get: function({attributes, responders, page}) {
       const {req, res} = attributes
-      const {session} = req
+      const {session: {user}} = req
 
-      const {isLogged = false} = layoutPresenter({session, topNav:false}, page, {jsAsset})
+      const {isLogged = false} = layoutPresenter({user, topNav:false}, page, {jsAsset})
 
       if(isLogged) {
-        responders.redirectWithCookies("/")
-        return
+        return responders.redirectWithCookies("/")
       }
 
       page.set(pageConfig)
