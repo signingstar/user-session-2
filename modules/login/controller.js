@@ -10,7 +10,7 @@ let debug = require("debug")("Modules:loginController")
 
 const controller = function({modules}) {
   const { pugCompiler, logger, jsAsset, cssAsset, queryDb } = modules
-  const title = 'Tisko - Login'
+  const title = 'Tisko - Contact Us'
   const srcPath = path.join(__dirname, '../../views/', 'login')
 
   let renderHTML = pugCompiler(srcPath)

@@ -35,13 +35,25 @@ module.exports =  {
           }
         },
         {
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+          test: /\.css/i,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              {loader:'css-loader'},
+            ]
+          })
         },
         // All files with a '.scss' extension will be handled by 'sass-loader'.
         {
           test: /\.scss$/i,
-          loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              {loader:'css-loader'},
+              {loader:'postcss-loader'},
+              {loader:'sass-loader'}
+            ]
+          })
         },
     ],
   },
